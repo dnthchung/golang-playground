@@ -1,21 +1,59 @@
 package main
 
 import (
-  "fmt"
+	"book-management/services"
+	"book-management/utils"
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
 )
 
-//TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
-// the <icon src="AllIcons.Actions.Execute"/> icon in the gutter and select the <b>Run</b> menu item from here.</p>
-
 func main() {
-  //TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
-  // to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
-  s := "gopher"
-  fmt.Println("Hello and welcome, %s!", s)
+	// Nhập thông tin người dùng
+	var name, gender string
+	var age int
 
-  for i := 1; i <= 5; i++ {
-	//TIP <p>To start your debugging session, right-click your code in the editor and select the Debug option.</p> <p>We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-	// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.</p>
-	fmt.Println("i =", 100/i)
-  }
+	fmt.Println("Chào mừng bạn, nhập thông tin cá nhân trước khi bắt đầu sử dụng phần mềm")
+	fmt.Print("Nhập họ và tên: ")
+	fmt.Scanln(&name)
+	fmt.Print("Nhập giới tính: ")
+	fmt.Scanln(&gender)
+	fmt.Print("Nhập tuổi: ")
+	fmt.Scanln(&age)
+
+	// Giới thiệu người dùng
+	utils.IntroduceUser(name, gender, age)
+
+	scanner := bufio.NewScanner(os.Stdin)
+	for {
+		fmt.Println("\nQuản lý sách:")
+		fmt.Println("1. Thêm sách")
+		fmt.Println("2. Hiển thị danh sách sách")
+		fmt.Println("3. Thoát")
+		fmt.Print("Chọn một tùy chọn: ")
+
+		scanner.Scan()
+		choice := strings.TrimSpace(scanner.Text())
+
+		switch choice {
+		case "1":
+			fmt.Print("Nhập tên sách: ")
+			scanner.Scan()
+			title := strings.TrimSpace(scanner.Text())
+
+			fmt.Print("Nhập tên tác giả: ")
+			scanner.Scan()
+			author := strings.TrimSpace(scanner.Text())
+
+			services.AddBook(title, author)
+		case "2":
+			services.ListBooks()
+		case "3":
+			fmt.Println("Tạm biệt!")
+			return
+		default:
+			fmt.Println("Lựa chọn không hợp lệ, vui lòng thử lại.")
+		}
+	}
 }
