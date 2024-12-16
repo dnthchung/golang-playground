@@ -1,98 +1,60 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-)
+import "fmt"
 
-// Cấu trúc lưu trữ thông tin sách
-type Book struct {
-	Title  string
-	Author string
+// (string, string) => type of return value
+func swap(x, y string) (string, string) {
+	return y, x
 }
 
-// Danh sách lưu trữ các sách
-var books []Book
-
-// Hàm thêm sách mới vào danh sách
-func addBook(title, author string) {
-	book := Book{Title: title, Author: author}
-	books = append(books, book)
-	fmt.Println("Sách đã được thêm thành công!")
+// x int, y int => x, y int
+func add(x, y int) int {
+	return x + y
 }
 
-// Hàm hiển thị danh sách sách
-func listBooks() {
-	if len(books) == 0 {
-		fmt.Println("Chưa có sách nào trong danh sách.")
-		return
-	}
-	fmt.Println("Danh sách sách:")
-	for i, book := range books {
-		fmt.Printf("%d. %s - %s\n", i+1, book.Title, book.Author)
-	}
+// sum là tên của tham số input, x và y là tên của tham số dc trả về
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
 }
 
-// Hàm giới thiệu người dùng
-func introduceUser(fullName, gender string, age int) {
-	fmt.Println("==============================")
-	fmt.Println("Họ và tên:", fullName)
-	fmt.Println("Giới tính:", gender)
-	fmt.Println("Tuổi:", age)
-	// Sửa fmt.Sprintf thành fmt.Printf để in ra màn hình
-	fmt.Printf("Xin chào %s, bạn là %s, hiện đang %d tuổi\n", fullName, gender, age)
-}
+var c, python, java bool
+var i, j int = 1, 2
 
-// Hàm chính
+//ne := 3 // error =>  vì chỉ dùng ":=" ở trong 1 function
+//c, python, java := true, false, "no!"
+
+// giá trị mặc định của biến :
+/**
+ * 0 cho số
+ * false cho bool
+ * "" cho string
+ */
+
 func main() {
 
-	// User name
-	var name string
-	var gender string
-	var age int
+	var i int
+	var f float64
+	var b bool
+	var s string
+	fmt.Printf("%v %v %v %q\n", i, f, b, s)
 
-	fmt.Println("Chào mừng bạn, nhập thông tin cá nhân trước khi bắt đầu sử dụng phần mềm")
-	fmt.Print("Nhập họ và tên: ")
-	fmt.Scanln(&name)
-	fmt.Print("Nhập giới tính: ")
-	fmt.Scanln(&gender)
-	fmt.Print("Nhập tuổi: ")
-	fmt.Scanln(&age)
+	for i := 0; i < 5; i++ {
+		fmt.Print(i)
+	}
 
-	//introduct user
-	introduceUser(name, gender, age)
-
-	scanner := bufio.NewScanner(os.Stdin)
-	for {
-		fmt.Println("\nQuản lý sách:")
-		fmt.Println("1. Thêm sách")
-		fmt.Println("2. Hiển thị danh sách sách")
-		fmt.Println("3. Thoát")
-		fmt.Print("Chọn một tùy chọn: ")
-
-		scanner.Scan()
-		choice := strings.TrimSpace(scanner.Text())
-
-		switch choice {
-		case "1":
-			fmt.Print("Nhập tên sách: ")
-			scanner.Scan()
-			title := strings.TrimSpace(scanner.Text())
-
-			fmt.Print("Nhập tên tác giả: ")
-			scanner.Scan()
-			author := strings.TrimSpace(scanner.Text())
-
-			addBook(title, author)
-		case "2":
-			listBooks()
-		case "3":
-			fmt.Println("Tạm biệt!")
-			return
-		default:
-			fmt.Println("Lựa chọn không hợp lệ, vui lòng thử lại.")
+	/**
+	break: Dừng vòng lặp ngay lập tức.
+	continue: Bỏ qua phần còn lại của vòng lặp và bắt đầu vòng mới.
+	*/
+	for i := 0; i < 10; i++ {
+		if i == 3 {
+			continue // Bỏ qua lần lặp khi i == 3
 		}
+		if i == 7 {
+			break // Dừng vòng lặp khi i == 7
+		}
+		fmt.Println("Giá trị của i:", i)
 	}
 }
