@@ -18,19 +18,20 @@ func main() {
 	// 	fmt.Printf("%s.\n", os)
 	// }
 
-	fmt.Print("Enter a number: ")
-	var key int
-	fmt.Scanf("%d", &key)
+	// switch {
+	// case key > 0:
+	// 	fmt.Println("Positive")
+	// 	fallthrough // Tiếp tục thực thi case tiếp theo
+	// case key < 0:
+	// 	fmt.Println("Negative")
+	// default:
+	// 	fmt.Println("Zero")
+	// }
 
-	switch {
-	case key > 0:
-		fmt.Println("Positive")
-		fallthrough // Tiếp tục thực thi case tiếp theo
-	case key < 0:
-		fmt.Println("Negative")
-	default:
-		fmt.Println("Zero")
-	}
+	// fmt.Println("Current time:", time.Now())
+	defer fmt.Println("world")
+
+	fmt.Println("hello")
 
 
 }
